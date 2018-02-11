@@ -138,7 +138,7 @@
 
 .timeline-dots-container {
     width: 60%;
-    height:39px;
+    height:37px;
     overflow: hidden;
     transform: translate3d(30px, 0px, 0px);
     background: url(../img/timeline-bg.png) bottom repeat-x;

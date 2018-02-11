@@ -33,7 +33,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active" >
+                <li class="nav-item active">
                     <a class="nav-link" href="#">主页
                         <span class="sr-only">(current)</span>
                     </a>
@@ -41,37 +41,37 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">兜兜一家</a>
                 </li>
-<!--                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>-->
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>-->
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container" ng-controller="imgList">
 
     <!-- Portfolio Item Heading -->
-    <h1 class="my-4">照片标题
-        <small>照照片时的心情</small>
+    <h1 class="my-4">{{current.title}}
+        <small>{{current.mood}}</small>
     </h1>
 
     <!-- Portfolio Item Row -->
     <div class="row">
 
-        <div class="col-md-8">
-            <img class="img-fluid" src="img/750x500.png" alt="">
+        <div class="col-md-8 img-container-div">
+            <img class="img-fluid" src="{{current.url}}" alt="{{current.title}}">
         </div>
 
-        <div class="col-md-4" ng-controller="imgList">
+        <div class="col-md-4">
             <h3 class="my-3">照片寄语</h3>
-            <p>爸爸最喜欢兜兜.爸爸最喜欢兜兜爸爸最喜欢兜兜爸爸最喜欢兜兜爸爸最喜欢兜兜爸爸最喜欢兜兜</p>
+            <p>{{current.content}}</p>
             <h3 class="my-3">照片信息</h3>
             <ul>
-                <li>拍摄地点:{{imgList.location}}</li>
-                <li>拍摄时间:{{imgList.date}}</li>
-                <li>拍摄人:兜兜爸</li>
+                <li>拍摄地点:{{current.location}}</li>
+                <li>拍摄时间:{{current.date}}</li>
+                <li>拍摄人:{{current.photographBy}}</li>
             </ul>
         </div>
 
@@ -80,29 +80,10 @@
     <div class="row mt-3 mb-5">
         <div class="col-md-12">
             <ul class="timeline-dots timeline-horizontal timeline-dots-container">
-                <li class="slide-active slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2017</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2018</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2019</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2020</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2021</button>
-                </li>
-                <li class=" slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2022</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2023</button>
-                </li>
-                <li class="slide-prev">
-                    <button type="button" role="button" class="timeline-btn">2017</button>
+                <li ng-class="{'slide-active': item.active, '': !item.active}" ng-repeat="item in imgList" title="{{item.title}}">
+                    <button type="button" role="button" class="timeline-btn" ng-click="change(item)"
+                            data-curId="{{item.id}}">{{item.tip}}
+                    </button>
                 </li>
             </ul>
         </div>
@@ -111,35 +92,35 @@
     <!-- /.row -->
 
     <!-- Related Projects Row -->
-<!--    <h3 class="my-4">Related Projects</h3>
+    <!--    <h3 class="my-4">Related Projects</h3>
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="img/cloth2.jpg" alt="">
-            </a>
-        </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="img/cloth2.jpg" alt="">
+                </a>
+            </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="img/photo1.jpg" alt="">
-            </a>
-        </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="img/photo1.jpg" alt="">
+                </a>
+            </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="img/cloth.jpg" alt="">
-            </a>
-        </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="img/cloth.jpg" alt="">
+                </a>
+            </div>
 
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="img/big.png" alt="">
-            </a>
-        </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="img/big.png" alt="">
+                </a>
+            </div>
 
-    </div>-->
+        </div>-->
     <!-- /.row -->
 
 </div>
@@ -156,8 +137,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="plugin/timeline/js/timeline.js"></script>
-
 </body>
 
 </html>
