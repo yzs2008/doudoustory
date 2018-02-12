@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>兜兜的世界</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../plugin/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/portfolio-item.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/fileUpload.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="../js/index.js"></script>
+</head>
+
+<body ng-app="doudou">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">兜兜</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">主页
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">兜兜一家</a>
+                </li>
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container" ng-controller="admin/img/upload">
+
+    <div class="control-group">
+        <div class="controls">
+            <input type="hidden" id="useDefaultAvatar" name="useDefaultAvatar" value="1">
+            <!--                                           上传图片 -->
+            <label style="margin-top:6px;font-size:12px;color:#22bbcc;">提示：按住Ctrl+Shift，可以实现滚轮缩放</label>
+            <div class="fileupload-container">
+                <div>
+                    <div class="imageBox">
+                        <div class="thumbBox"></div>
+                        <div class="spinner" style="display: none">Loading...</div>
+                    </div>
+                    <div class="action">
+                        <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
+                            <label for="upload-file">选择照片</label>
+                        </a>
+                            <input type="file"  name="avatar" id="upload-file" style="display: none;" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp"/>
+                            <input type="hidden" name="imageClipStartX"/>
+                            <input type="hidden" name="imageClipStartY"/>
+                            <input type="hidden" name="imageClipWidth"/>
+                            <input type="hidden" name="imageClipHeight"/>
+                        </div>
+                        <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
+                        <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+                        <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+                    </div>
+                </div>
+                <div class="cropped"></div>
+            </div>
+            <!--                                           上传图片 -->
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">照片寄语</label>
+        <div class="controls">
+            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.doudoustory.im 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../plugin/jquery/jquery.min.js"></script>
+<script src="../plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../js/cropbox.js"></script>
+<script>
+    $(function(){
+        var options =
+            {
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: '../img/sys/default_avatar.png'
+            };
+        var cropper = $('.imageBox').cropbox(options);
+        $('#upload-file').on('change', function(){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                options.imgSrc = e.target.result;
+                cropper = $('.imageBox').cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+
+            setTimeout(triggerCrop, 300);
+        });
+        $('#btnCrop').on('click', function(){
+            var img = cropper.getDataURL();
+            $('.cropped').html('');
+            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+
+        });
+        $('#btnZoomIn').on('click', function(){
+            cropper.zoomIn();
+        });
+        $('#btnZoomOut').on('click', function(){
+            cropper.zoomOut();
+        });
+        setTimeout(triggerCrop, 300);
+    });
+    function triggerCrop(){
+        $('#btnCrop').trigger('click');
+    }
+</script>
+</body>
+
+</html>

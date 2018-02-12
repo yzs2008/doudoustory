@@ -109,7 +109,6 @@
     outline: none;
     color: #333;
     font-size: 12px;
-    transition: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .timeline-horizontal .timeline-dots button {
