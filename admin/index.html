@@ -17,11 +17,11 @@
     <link href="../css/portfolio-item.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/fileUpload.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="../js/index.js"></script>
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="../js/index.js"></script>-->
 </head>
 
-<body ng-app="doudou">
+<body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
@@ -50,7 +50,7 @@
 </nav>
 
 <!-- Page Content -->
-<div class="container" ng-controller="admin/img/upload">
+<div class="container"><!--ng-controller="admin/img/upload"-->
 
     <div class="control-group">
         <div class="controls">
@@ -64,21 +64,34 @@
                         <div class="spinner" style="display: none">Loading...</div>
                     </div>
                     <div class="action">
-                        <div class="new-contentarea tc"> <a href="javascript:void(0)" class="upload-img">
+                        <div class="new-contentarea tc"><a href="javascript:void(0)" class="upload-img">
                             <label for="upload-file">选择照片</label>
                         </a>
-                            <input type="file"  name="avatar" id="upload-file" style="display: none;" accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp"/>
+                            <input type="file" name="avatar" id="upload-file" style="display: none;"
+                                   accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp"/>
                             <input type="hidden" name="imageClipStartX"/>
                             <input type="hidden" name="imageClipStartY"/>
                             <input type="hidden" name="imageClipWidth"/>
                             <input type="hidden" name="imageClipHeight"/>
                         </div>
-                        <input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">
-                        <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
-                        <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+                        <input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切">
+                        <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+">
+                        <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-">
                     </div>
                 </div>
-                <div class="cropped"></div>
+                <div class="cropped">
+                    <img src="" align="absmiddle" id="A-img-thumbox" class="thumbBox-img" data-width-coe="1"
+                         data-height-coe="1" data-const="true"
+                         style="width:128px;height: 128px; margin-top:10px;border-radius:70px;box-shadow:0px 0px 12px #7E7E7E;">
+                    <p>128px*128px</p>
+                    <img src="" align="absmiddle" id="B-img-thumbox" class="thumbBox-img" data-width-coe="16" data-height-coe="9"
+                         style="width:128px;margin-top:30px;border-radius:20px;box-shadow:0px 0px 12px #7E7E7E;">
+                    <p>16:9</p>
+                    <img src="" align="absmiddle" id="C-img-thumbox" class="thumbBox-img" data-width-coe="4" data-height-coe="3"
+                         style="width:128px;margin-top:30px;border-radius:10px;box-shadow:0px 0px 12px #7E7E7E;">
+                    <p>4:3</p>
+                    <input type="hidden" id="currentBox" value="A-img-thumbox"/>
+                </div>
             </div>
             <!--                                           上传图片 -->
         </div>
@@ -86,7 +99,8 @@
     <div class="control-group">
         <label class="control-label">照片寄语</label>
         <div class="controls">
-            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
+            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..."
+                      style="width: 98%; height: 200px"></textarea>
         </div>
     </div>
 
@@ -106,7 +120,7 @@
 <script src="../plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../js/cropbox.js"></script>
 <script>
-    $(function(){
+    $(function () {
         var options =
             {
                 thumbBox: '.thumbBox',
@@ -114,35 +128,70 @@
                 imgSrc: '../img/sys/default_avatar.png'
             };
         var cropper = $('.imageBox').cropbox(options);
-        $('#upload-file').on('change', function(){
+        $('#upload-file').on('change', function () {
             var reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 options.imgSrc = e.target.result;
                 cropper = $('.imageBox').cropbox(options);
             }
             reader.readAsDataURL(this.files[0]);
-            this.files = [];
+            this.files = null;
 
             setTimeout(triggerCrop, 300);
         });
-        $('#btnCrop').on('click', function(){
+        $('#btnCrop').on('click', function () {
             var img = cropper.getDataURL();
-            $('.cropped').html('');
-            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
-            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
-            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+            var cur = $('#currentBox').val();
+            $('#' + cur).attr("src", img);
 
         });
-        $('#btnZoomIn').on('click', function(){
+        $('#btnZoomIn').on('click', function () {
             cropper.zoomIn();
         });
-        $('#btnZoomOut').on('click', function(){
+        $('#btnZoomOut').on('click', function () {
             cropper.zoomOut();
         });
+        $('.thumbBox-img').on('click', function (evt) {
+            //设置当前工作台
+            var cur = $(evt.target);
+            var curWidth = cur.width();
+            var curHeight = cur.height();
+
+            var box = $('.imageBox');
+            var boxWidth = box.width();
+            var boxHeight = box.height();
+
+            var thumbBox = $('.thumbBox');
+
+            $('#currentBox').val(cur.attr("id"));
+
+            if(!cur.data('const')){
+                var widthCoe = cur.data('width-coe');
+                var heightCoe = cur.data('height-coe');
+                curWidth = boxWidth;
+                curHeight = boxWidth * heightCoe / widthCoe;
+                if(curHeight > boxHeight){
+                    curHeight = boxHeight;
+                    curWidth = boxHeight * widthCoe / heightCoe;
+                }
+            }
+
+            thumbBox.width(curWidth);
+            thumbBox.height(curHeight);
+            thumbBox.css("top", boxHeight * 0.5 - curHeight * 0.5);
+            thumbBox.css("left", boxWidth * 0.5 - curWidth * 0.5);
+            cur.attr("src", cropper.getDataURL());
+            //调整截图比例
+            //触发截图
+            //显示结果
+        });
+
         setTimeout(triggerCrop, 300);
     });
-    function triggerCrop(){
-        $('#btnCrop').trigger('click');
+    function triggerCrop() {
+        $('#A-img-thumbox').trigger('click');
+        $('#B-img-thumbox').trigger('click');
+        $('#C-img-thumbox').trigger('click');
     }
 </script>
 </body>

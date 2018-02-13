@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>兜兜的世界</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../plugin/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/portfolio-item.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/fileUpload.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="../js/index.js"></script>
+</head>
+
+<body >
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">兜兜</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">主页
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">兜兜一家</a>
+                </li>
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                </li>-->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container" >
+
+    <div class="control-group">
+        <canvas id="myCanvas" width="1220" height="684"></canvas>
+    </div>
+    <div class="control-group">
+        <label class="control-label">照片寄语</label>
+        <div class="controls">
+            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..." style="width: 98%; height: 200px"></textarea>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-light">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.doudoustory.im 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../plugin/jquery/jquery.min.js"></script>
+<script src="../plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../js/cropbox.js"></script>
+<script>
+    window.onload = function() {
+        var img=document.createElement('img');
+        img.src='../img/77.jpg';
+        img.onload = function () {
+            var c=document.getElementById('myCanvas');
+            var ctx=c.getContext('2d');
+            ctx.drawImage(img,100,300,1220,684,0,0,1224,918);
+        }
+    };
+</script>
+</body>
+
+</html>
+
+<!--
+
+img	Specifies the image, canvas, or video element to use
+sx	Optional. The x coordinate where to start clipping	Play it »
+sy	Optional. The y coordinate where to start clipping	Play it »
+swidth	Optional. The width of the clipped image	Play it »
+sheight	Optional. The height of the clipped image	Play it »
+x	The x coordinate where to place the image on the canvas	Play it »
+y	The y coordinate where to place the image on the canvas	Play it »
+width	Optional. The width of the image to use (stretch or reduce the image)	Play it »
+height	Optional. The height of the image to use (stretch or reduce the image)-->

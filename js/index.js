@@ -18,3 +18,6 @@ app.controller('imgList', function ($scope, $http) {
     };
 });
 
+app.controller('/admin/img/upload', function ($scope, $http) {
+
+});
