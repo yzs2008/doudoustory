@@ -86,6 +86,22 @@
     border: 0px #fff solid;
 }
 
+.Btnsty_peyton_save {
+    width: 5.3rem !important;
+    display: inline-block;
+    margin-bottom: 10px;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.0rem;
+    color: #FFFFFF;
+    margin: 0px 2px;
+    background-color: #f38e81;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #B0B0B0;
+    border: 0px #fff solid;
+}
 /*选择文件上传*/
 .new-contentarea {
     overflow: hidden;

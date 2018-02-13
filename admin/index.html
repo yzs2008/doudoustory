@@ -64,9 +64,10 @@
                         <div class="spinner" style="display: none">Loading...</div>
                     </div>
                     <div class="action">
-                        <div class="new-contentarea tc"><a href="javascript:void(0)" class="upload-img">
-                            <label for="upload-file">选择照片</label>
-                        </a>
+                        <div class="new-contentarea tc">
+                            <a href="javascript:void(0)" class="upload-img">
+                                <label for="upload-file">选择照片</label>
+                            </a>
                             <input type="file" name="avatar" id="upload-file" style="display: none;"
                                    accept="image/gif,image/png,image/jpg,image/jpeg,image/bmp"/>
                             <input type="hidden" name="imageClipStartX"/>
@@ -84,10 +85,12 @@
                          data-height-coe="1" data-const="true"
                          style="width:128px;height: 128px; margin-top:10px;border-radius:70px;box-shadow:0px 0px 12px #7E7E7E;">
                     <p>128px*128px</p>
-                    <img src="" align="absmiddle" id="B-img-thumbox" class="thumbBox-img" data-width-coe="16" data-height-coe="9"
+                    <img src="" align="absmiddle" id="B-img-thumbox" class="thumbBox-img" data-width-coe="16"
+                         data-height-coe="9"
                          style="width:128px;margin-top:30px;border-radius:20px;box-shadow:0px 0px 12px #7E7E7E;">
                     <p>16:9</p>
-                    <img src="" align="absmiddle" id="C-img-thumbox" class="thumbBox-img" data-width-coe="4" data-height-coe="3"
+                    <img src="" align="absmiddle" id="C-img-thumbox" class="thumbBox-img" data-width-coe="4"
+                         data-height-coe="3"
                          style="width:128px;margin-top:30px;border-radius:10px;box-shadow:0px 0px 12px #7E7E7E;">
                     <p>4:3</p>
                     <input type="hidden" id="currentBox" value="A-img-thumbox"/>
@@ -96,11 +99,14 @@
             <!--                                           上传图片 -->
         </div>
     </div>
-    <div class="control-group">
-        <label class="control-label">照片寄语</label>
-        <div class="controls">
-            <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..."
-                      style="width: 98%; height: 200px"></textarea>
+    <label class="control-label">照片寄语</label>
+    <div class="row">
+        <div class="col-md-8 rich-text-box">
+           <textarea class="input-xlarge textarea" name="judge.introduction" placeholder="Enter text ..."
+                     style="width: 100%; height: 4rem"></textarea>
+        </div>
+        <div class="col-md-4">
+            <input type="button" id="btnSave" class="Btnsty_peyton_save" value="提交">
         </div>
     </div>
 
@@ -165,12 +171,12 @@
 
             $('#currentBox').val(cur.attr("id"));
 
-            if(!cur.data('const')){
+            if (!cur.data('const')) {
                 var widthCoe = cur.data('width-coe');
                 var heightCoe = cur.data('height-coe');
                 curWidth = boxWidth;
                 curHeight = boxWidth * heightCoe / widthCoe;
-                if(curHeight > boxHeight){
+                if (curHeight > boxHeight) {
                     curHeight = boxHeight;
                     curWidth = boxHeight * widthCoe / heightCoe;
                 }
@@ -193,6 +199,7 @@
         $('#B-img-thumbox').trigger('click');
         $('#C-img-thumbox').trigger('click');
     }
+
 </script>
 </body>
 
